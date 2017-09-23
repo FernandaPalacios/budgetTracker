@@ -34,12 +34,31 @@ public class Airport {
 
 	}
 
-	public boolean equals(Airport other_airport){
+	public boolean equals(Airport otherAirport){
+		ArrayList<Flight> thisFlights = this.getFlights();
+		ArrayList<Flight> otherFlights = otherAirport.getFlights();
+
+		if(this.getName().equals(otherAirport.getName()) &&
+		thisFlights.size() == otherFlights.size()){
+				// flights' order doesn't matter
+			for(Flight flight : thisFlights) {
+				if (!otherAirport.flights.contains(flight)) {
+					return false;
+				}
+			}
+				return true;
+
+		}
+
 		return false;
 	}
 
 	public String getName(){
 		return this.name;
+	}
+
+	public ArrayList<Flight> getFlights(){
+		return this.flights;
 	}
 
 	public String toString(){

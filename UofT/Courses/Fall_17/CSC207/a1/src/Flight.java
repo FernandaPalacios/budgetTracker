@@ -23,7 +23,9 @@ public class Flight {
     }
 
     public boolean equals(Flight otherFlight){
-        return false;
+        return this.name.equals(otherFlight.name) &&
+                this.getDate().equals(otherFlight.getDate());
+
     }
 
     public ArrayList getAirports() {

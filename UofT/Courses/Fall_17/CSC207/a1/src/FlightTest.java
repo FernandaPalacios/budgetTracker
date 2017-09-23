@@ -82,8 +82,6 @@ public class FlightTest {
         assertTrue(a1.onSameFlight(a2));
     }
 
-    // tested
-
     @Test
     public void testNotOnSameFlight() {
         Airport a1 = new Airport("YYZ");
@@ -112,6 +110,7 @@ public class FlightTest {
         assertTrue(a1.onSameFlight(a2));
         assertTrue(a2.onSameFlight(a1));
     }
+
 
     @Test
     public void testFlightEquals() {
@@ -188,6 +187,8 @@ public class FlightTest {
         a2.addFlight(f1);
         assertTrue(a1.equals(a2));
     }
+
+    // tested
 
     @Test
     public void testAirportNotEqualsExtraFlight() {
@@ -273,6 +274,7 @@ public class FlightTest {
 
 
     public static void main(String[] args) {
+
 
     }
 }
