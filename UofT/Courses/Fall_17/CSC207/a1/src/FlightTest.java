@@ -188,8 +188,6 @@ public class FlightTest {
         assertTrue(a1.equals(a2));
     }
 
-    // tested
-
     @Test
     public void testAirportNotEqualsExtraFlight() {
         Airport a1 = new Airport("YYZ");
@@ -237,6 +235,8 @@ public class FlightTest {
         assertEquals(exp, res);
     }
 
+    // tested
+
     @Test
     public void testFlightToStringNoAirports() {
         Flight f1 = new Flight("AC123", "12-09-2017");
@@ -274,7 +274,6 @@ public class FlightTest {
 
 
     public static void main(String[] args) {
-
 
     }
 }

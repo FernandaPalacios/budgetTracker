@@ -61,8 +61,20 @@ public class Airport {
 		return this.flights;
 	}
 
-	public String toString(){
-		return null;
+	public String toString() {
+		// "YYZ (AC123)"
+		// airport name (flight1, ... flightn)
+		String flights = new String("");
+
+		for(Flight flight: this.getFlights()){
+			flights += flight.getName() + ", ";
+		}
+		// to avoid index out of range
+		if(flights.length() != 0){
+			flights = flights.substring(0, flights.length() - 2);
+		}
+		// delete last comma
+		return this.getName() + " (" +  flights + ")";
 	}
 
 }
