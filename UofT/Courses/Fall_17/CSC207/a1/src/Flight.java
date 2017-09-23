@@ -41,6 +41,22 @@ public class Flight {
     }
 
     public String toString(){
-        return null;
+        // Flight's Name Flight's Date
+        // Airport 1
+        // ...
+        // Airport n
+
+        String answer = this.getName() + ", " + this.getDate();
+
+        int i = 0;
+        ArrayList<Airport> thisAirports = this.getAirports();
+
+        while(i < thisAirports.size()) {
+            Airport currAirport = thisAirports.get(i);
+            answer += System.lineSeparator() + currAirport.getName();
+            i++;
+        }
+
+        return answer;
     }
 }

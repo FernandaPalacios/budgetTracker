@@ -235,8 +235,6 @@ public class FlightTest {
         assertEquals(exp, res);
     }
 
-    // tested
-
     @Test
     public void testFlightToStringNoAirports() {
         Flight f1 = new Flight("AC123", "12-09-2017");
@@ -270,10 +268,5 @@ public class FlightTest {
         String exp = "AC123, 12-09-2017" + System.lineSeparator() + a1.getName() + System.lineSeparator() + a2.getName()
                 + System.lineSeparator() + a3.getName() + System.lineSeparator() + a4.getName();
         assertEquals(exp, res);
-    }
-
-
-    public static void main(String[] args) {
-
     }
 }
