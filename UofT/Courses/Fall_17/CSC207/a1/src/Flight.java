@@ -12,7 +12,13 @@ public class Flight {
 	}
 
 
-    public void addAirport(Airport new_Airport){
+    public void addAirport(Airport newAirport){
+	    // check flight doesn't have repeated airport
+	    if(!airports.contains(newAirport)){
+	        airports.add(newAirport);
+	        newAirport.addFlight(this);
+        }
+
 
     }
 

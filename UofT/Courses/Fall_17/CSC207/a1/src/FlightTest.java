@@ -1,4 +1,7 @@
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -24,7 +27,6 @@ public class FlightTest {
         assertEquals("YYZ", a.getName());
     }
 
-    // tested
 
     @Test
     public void testAirportWasVisitedBy() {
@@ -34,6 +36,7 @@ public class FlightTest {
         assertTrue(a.wasVisitedBy(f));
     }
 
+
     @Test
     public void testAirportNotVisitedBy() {
         Flight f = new Flight("AC123", "12-09-2017");
@@ -41,11 +44,13 @@ public class FlightTest {
         assertFalse(a.wasVisitedBy(f));
     }
 
+
     @Test
     public void testGetAirportOneFlightNoAirport() {
         Flight f = new Flight("AC123", "12-09-2017");
         assertTrue(f.getAirports().size() == 0);
     }
+
 
     @Test
     public void testOneFlightAddAirportGetAirports() {
@@ -66,6 +71,7 @@ public class FlightTest {
         assertTrue(a.wasVisitedBy(f));
     }
 
+
     @Test
     public void testOnSameFlight() {
         Flight f = new Flight("AC123", "12-09-2017");
@@ -75,6 +81,8 @@ public class FlightTest {
         f.addAirport(a2);
         assertTrue(a1.onSameFlight(a2));
     }
+
+    // tested
 
     @Test
     public void testNotOnSameFlight() {
@@ -263,4 +271,8 @@ public class FlightTest {
         assertEquals(exp, res);
     }
 
+
+    public static void main(String[] args) {
+
+    }
 }

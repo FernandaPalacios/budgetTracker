@@ -10,14 +10,27 @@ public class Airport {
 	}
 
 	public boolean wasVisitedBy(Flight flight){
-		return false;
+		return flights.contains(flight);
 	}
 
 	public boolean onSameFlight(Airport airport){
-		return false;
+		// copy these flights
+		ArrayList thisFlightsCopy = new ArrayList<Flight>(this.flights);
+
+		// retain intersection between these flights and others' flights
+		thisFlightsCopy.retainAll(airport.flights);
+
+		// return true if size > 0
+		return thisFlightsCopy.size() > 0;
+
 	}
 
 	public void addFlight(Flight newFlight){
+		// check this Airport doesn't have repeated flight
+		if(!flights.contains(newFlight)){
+			flights.add(newFlight);
+			newFlight.addAirport(this);
+		}
 
 	}
 
