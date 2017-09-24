@@ -6,8 +6,6 @@ import java.util.*;
 
 public class FlightSchedule {
 
-    // Do I need a constructor? Don't think so
-
     public String searchAirport(String fileName){
 
         // print to the screen: Enter the name of an airport
@@ -41,7 +39,7 @@ public class FlightSchedule {
         // This creates dictionary of the form:
         // key: Name, value: flights
 
-        Map<String, ArrayList<String>> AirportToFlights= new HashMap<String, ArrayList<String>>();
+        Map<Airport, ArrayList<Flight>> AirportToFlights= new HashMap<Airport, ArrayList<Flight>>();
 
 
         while (scannerFile.hasNextLine()) {
@@ -50,27 +48,38 @@ public class FlightSchedule {
             // split currLine by '|'
             String[] parts = currLine.split( "\\|");
 
-            // extract Airports names and add Airport: Flight to dictionary
+            // construct Flight
            String flightName = parts[0].split("\\s")[0];
+           String flightDate = parts[0].split("\\s")[1];
+
+           Flight currFlight = new Flight(flightName, flightDate);
+
+           // Extract airports to be added to this Flight
            String[] airportsArr = Arrays.copyOfRange(parts, 1, parts.length);
-           ArrayList<String> airports = new ArrayList<String>(Arrays.asList(airportsArr));
+            ArrayList<String> airports = new ArrayList<String>(Arrays.asList(airportsArr));
 
            for(String a : airports) {
-               // check if a is already in dictionary
-               if (AirportToFlights.get(a) == null) {
-                   AirportToFlights.put(a, new ArrayList<String>());
-               }
+               // construct Airport
+               Airport airport = new Airport(a);
 
-               // TODO: check if repeated flight
-               
-               AirportToFlights.get(a).add(flightName);
+               // add airport to Flight, to compare flights (with Flight's equal method later)
+               airport.addFlight(currFlight);
+
+               // check if a is already in dictionary
+               if (AirportToFlights.get(airport) == null){
+                   AirportToFlights.put(airport, new ArrayList<Flight>());
+               }
+               // check if repeated flight
+               if(!airport.wasVisitedBy(currFlight)) {
+                   AirportToFlights.get(airport).add(currFlight);
+               }
            }
 
         }
 
         scannerFile.close();
-        for ( String a : AirportToFlights.keySet() ) {
-            System.out.println(a + AirportToFlights.get(a));
+        for (Airport a : AirportToFlights.keySet() ) {
+            System.out.println(a.getName()+ AirportToFlights.get(a));
         }
 
 
