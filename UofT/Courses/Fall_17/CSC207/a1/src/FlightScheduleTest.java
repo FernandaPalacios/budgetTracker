@@ -49,8 +49,14 @@ public class FlightScheduleTest {
 
     }
     @Test
-    public void testInvalidAirport() {
+    public void testAirportNotFoung() {
         // GYE
+        //
+    }
+
+    @Test
+    public void testInvalidLengthAirport() {
+        // Guayaquil
         //
     }
 }
