@@ -29,26 +29,23 @@ public class FlightSchedule {
         }
 
         // Case 3: Valid Input
-        ArrayList<Airport> seenAirports = readAirports(fileName);
+        else {
+            ArrayList<Airport> seenAirports = readAirports(fileName);
 
-        System.out.println(seenAirports.size());
 
-        for(Airport a: seenAirports){
-            System.out.println(a.toString());
+            // Search for match
+            boolean match = hasMatch(userAirport, seenAirports);
+            // If found, return Airport Information
+            if (match) {
+                Airport finalAirport = getAirport(userAirport, seenAirports);
+                System.out.println(finalAirport.toString());
+            }
+            // Otherwise, prompt user again
+            else {
+                searchAirport(fileName);
+            }
+
         }
-
-        // Search for match
-        boolean match = hasMatch(userAirport, seenAirports);
-        // If found, return Airport Information
-        if(match){
-            Airport finalAirport = getAirport(userAirport, seenAirports);
-            System.out.println(finalAirport.toString());
-        }
-        // Otherwise, prompt user again
-        else{
-            // searchAirport(fileName);
-        }
-
         return null;
     }
 
@@ -82,8 +79,10 @@ public class FlightSchedule {
             String[] parts = currLine.split("\\|");
 
             // construct Flight
-            String flightName = parts[0].split("\\s")[0].replaceAll("\\s", "");
-            String flightDate = parts[0].split("\\s")[1].replaceAll("\\s", "");
+            String flightName = parts[0].split("\\s")[0];
+            flightName = cleanStr(flightName);
+            String flightDate = parts[0].split("\\s")[1];
+            flightDate = cleanStr(flightDate);
 
             Flight currFlight = new Flight(flightName, flightDate);
 
@@ -91,7 +90,9 @@ public class FlightSchedule {
             String[] airportNamesArr = Arrays.copyOfRange(parts, 1, parts.length);
             ArrayList<String> airportNames = new ArrayList<String>(Arrays.asList(airportNamesArr));
 
-            
+            for(String name : airportNames){
+                name = cleanStr(name);
+            }
 
             // iterate over airports
             for(String airportName : airportNames){
@@ -123,10 +124,12 @@ public class FlightSchedule {
      */
     public Airport getAirport(String airportName, ArrayList<Airport> airports){
         Airport airportAnswer = null;
+        airportName = cleanStr(airportName);
 
         for(Airport a: airports) {
             String aName = a.getName();
-            if (a.getName().equals(airportName)) {
+            aName = cleanStr(aName);
+            if (aName.equals(airportName)) {
                 airportAnswer = a;
             }
         }
@@ -149,16 +152,20 @@ public class FlightSchedule {
         // iterate over airports to extract names
         for(Airport a: Airports){
             String currName = a.getName();
-            currName = currName.replaceAll("\\s", "");
+            currName = cleanStr(currName);
             if(!names.contains(currName)){
                 names.add(currName);
             }
         }
 
         // return whether AirportName is in names
-        return names.contains(AirportName.replaceAll("\\s", ""));
+        return names.contains(cleanStr(AirportName));
     }
 
+
+    public String cleanStr(String s){
+        return s.replaceAll("\\s", "");
+    }
 
 
 	public static void main(String[] args) {
