@@ -29,17 +29,27 @@ public class FlightSchedule {
         }
 
         // Case 3: Valid Input
-
         ArrayList<Airport> seenAirports = readAirports(fileName);
 
+        System.out.println(seenAirports.size());
+
+        for(Airport a: seenAirports){
+            System.out.println(a.toString());
+        }
 
         // Search for match
-        // boolean match = hasMatch(userAirport, seenAirports);
-
-
+        boolean match = hasMatch(userAirport, seenAirports);
+        // If found, return Airport Information
+        if(match){
+            Airport finalAirport = getAirport(userAirport, seenAirports);
+            System.out.println(finalAirport.toString());
+        }
+        // Otherwise, prompt user again
+        else{
+            // searchAirport(fileName);
+        }
 
         return null;
-
     }
 
     public String promptAirport(){
@@ -72,8 +82,8 @@ public class FlightSchedule {
             String[] parts = currLine.split("\\|");
 
             // construct Flight
-            String flightName = parts[0].split("\\s")[0];
-            String flightDate = parts[0].split("\\s")[1];
+            String flightName = parts[0].split("\\s")[0].replaceAll("\\s", "");
+            String flightDate = parts[0].split("\\s")[1].replaceAll("\\s", "");
 
             Flight currFlight = new Flight(flightName, flightDate);
 
@@ -81,6 +91,7 @@ public class FlightSchedule {
             String[] airportNamesArr = Arrays.copyOfRange(parts, 1, parts.length);
             ArrayList<String> airportNames = new ArrayList<String>(Arrays.asList(airportNamesArr));
 
+            
 
             // iterate over airports
             for(String airportName : airportNames){
@@ -101,13 +112,8 @@ public class FlightSchedule {
                 // update airport
                 currAirport.addFlight(currFlight);
             }
-
         }
-        for(Airport a: answer){
-            System.out.println(a.toString());
-        }
-
-        return null;
+        return answer;
     }
 
 
@@ -132,7 +138,10 @@ public class FlightSchedule {
         return airportAnswer;
     }
 
-
+    /*
+    * Return whether Airports contains an airport with name AirportName.
+    * Ignore whitespaces to compare names.
+     */
     public boolean hasMatch(String AirportName, ArrayList<Airport> Airports){
         // accumulate names
         ArrayList<String> names = new ArrayList<String>();
@@ -140,13 +149,14 @@ public class FlightSchedule {
         // iterate over airports to extract names
         for(Airport a: Airports){
             String currName = a.getName();
+            currName = currName.replaceAll("\\s", "");
             if(!names.contains(currName)){
                 names.add(currName);
             }
         }
 
         // return whether AirportName is in names
-        return names.contains(AirportName);
+        return names.contains(AirportName.replaceAll("\\s", ""));
     }
 
 
