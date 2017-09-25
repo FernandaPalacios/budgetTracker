@@ -84,18 +84,48 @@ public class FlightSchedule {
 
             // iterate over airports
             for(String airportName : airportNames){
+                Airport currAirport = null;
                 // check if we've seen this airportName
                 if(!hasMatch(airportName, answer)){
-                    System.out.println(airportName);
+                    // create and Airport
+                    currAirport = new Airport(airportName);
+                    // add it to answer
+                    answer.add(currAirport);
                 }
+                else{
+                    // get airport with airportName
+                    currAirport = getAirport(airportName, answer);
+                }
+                // update airport
+                currAirport.addFlight(currFlight);
 
             }
-
 
         }
 
         return null;
     }
+
+
+    /*
+    * Return the Airport in airports with name airportName.
+    * Assumption: airports contain unique airports
+     */
+    public Airport getAirport(String airportName, ArrayList<Airport> airports){
+        Airport airportAnswer = null;
+
+        for(Airport a: airports) {
+            if (a.getName() == airportName) {
+                airportAnswer = a;
+            }
+        }
+
+        if(airportAnswer == null){
+            System.out.println("Airport Not Found");
+        }
+        return airportAnswer;
+    }
+
 
     public boolean hasMatch(String AirportName, ArrayList<Airport> Airports){
         // accumulate names
@@ -117,20 +147,21 @@ public class FlightSchedule {
 
 	public static void main(String[] args) {
         FlightSchedule fs = new FlightSchedule();
-        fs.searchAirport("FlightList.txt");
+        // fs.searchAirport("FlightList.txt");
 
-        // Airport a1 = new Airport("YYZ");
-        // Airport a2 = new Airport("YVR");
-        // Airport a3 = new Airport("YHZ");
-        // Airport a4 = new Airport("YUL");
-        // Flight f1 = new Flight("AC123", "12-09-2017");
-        //
-        // ArrayList<Airport> airportsTester = new ArrayList<Airport>();
-        // airportsTester.add(a1);
-        // airportsTester.add(a2);
-        // airportsTester.add(a3);
-        // airportsTester.add(a4);
-        //
+        Airport a1 = new Airport("YYZ");
+        Airport a2 = new Airport("YVR");
+        Airport a3 = new Airport("YHZ");
+        Airport a4 = new Airport("YUL");
+        Flight f1 = new Flight("AC123", "12-09-2017");
+
+        ArrayList<Airport> airportsTester = new ArrayList<Airport>();
+        airportsTester.add(a1);
+        airportsTester.add(a2);
+        airportsTester.add(a3);
+        airportsTester.add(a4);
+
+
         //
         // System.out.println(fs.hasMatch( "YYZ", new ArrayList<Airport>())); // False
         // System.out.println(fs.hasMatch( "GRU", airportsTester)); // False
