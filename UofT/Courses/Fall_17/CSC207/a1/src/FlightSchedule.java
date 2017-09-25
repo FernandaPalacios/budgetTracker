@@ -94,13 +94,17 @@ public class FlightSchedule {
                 }
                 else{
                     // get airport with airportName
+
+
                     currAirport = getAirport(airportName, answer);
                 }
                 // update airport
                 currAirport.addFlight(currFlight);
-
             }
 
+        }
+        for(Airport a: answer){
+            System.out.println(a.toString());
         }
 
         return null;
@@ -115,7 +119,8 @@ public class FlightSchedule {
         Airport airportAnswer = null;
 
         for(Airport a: airports) {
-            if (a.getName() == airportName) {
+            String aName = a.getName();
+            if (a.getName().equals(airportName)) {
                 airportAnswer = a;
             }
         }
@@ -123,6 +128,7 @@ public class FlightSchedule {
         if(airportAnswer == null){
             System.out.println("Airport Not Found");
         }
+
         return airportAnswer;
     }
 
@@ -147,7 +153,7 @@ public class FlightSchedule {
 
 	public static void main(String[] args) {
         FlightSchedule fs = new FlightSchedule();
-        // fs.searchAirport("FlightList.txt");
+        fs.searchAirport("FlightList.txt");
 
         Airport a1 = new Airport("YYZ");
         Airport a2 = new Airport("YVR");
@@ -164,7 +170,9 @@ public class FlightSchedule {
 
         //
         // System.out.println(fs.hasMatch( "YYZ", new ArrayList<Airport>())); // False
-        // System.out.println(fs.hasMatch( "GRU", airportsTester)); // False
+        // System.out.println(fs.hasMatch( "YYZ", airportsTester)); // False
 
+        // Airport tester = fs.getAirport("YYZ", airportsTester);
+        // System.out.println(tester.getName());
     }
 }
