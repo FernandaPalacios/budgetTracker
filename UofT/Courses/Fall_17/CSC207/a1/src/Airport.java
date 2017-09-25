@@ -74,7 +74,8 @@ public class Airport {
 			flights = flights.substring(0, flights.length() - 2);
 		}
 		// delete last comma
-		return this.getName() + " (" +  flights + ")";
+		String name = new String(this.getName());
+		return this.getName().trim() + " (" +  flights + ")";
 	}
 
 }

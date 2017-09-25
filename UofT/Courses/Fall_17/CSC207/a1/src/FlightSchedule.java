@@ -172,24 +172,29 @@ public class FlightSchedule {
         FlightSchedule fs = new FlightSchedule();
         fs.searchAirport("FlightList.txt");
 
-        Airport a1 = new Airport("YYZ");
-        Airport a2 = new Airport("YVR");
-        Airport a3 = new Airport("YHZ");
-        Airport a4 = new Airport("YUL");
-        Flight f1 = new Flight("AC123", "12-09-2017");
+        // MIA
+        // MIA (LA235)
 
-        ArrayList<Airport> airportsTester = new ArrayList<Airport>();
-        airportsTester.add(a1);
-        airportsTester.add(a2);
-        airportsTester.add(a3);
-        airportsTester.add(a4);
+        // ATL
+        // ATL (LA235)
 
+        // NYC
+        // NYC (LA235)
 
+        // SAO
+        // SAO (AA128, AA137)
+
+        // YYZ
+        // YYZ (AC123) *******
+
+        // PVG
+        // PVG (AC123, AC123)
+
+        // GYE
         //
-        // System.out.println(fs.hasMatch( "YYZ", new ArrayList<Airport>())); // False
-        // System.out.println(fs.hasMatch( "YYZ", airportsTester)); // False
 
-        // Airport tester = fs.getAirport("YYZ", airportsTester);
-        // System.out.println(tester.getName());
+        // Guayaquil
+        //
+
     }
 }
